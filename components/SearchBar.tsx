@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import SearchManufacturer from "./SearchManufacturer";
+import { CustomButton } from ".";
 
 const SEARCH_BAR_ID = "searchbar-id";
 
@@ -22,7 +23,11 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   </button>
 );
 
-const SearchBar = () => {
+const SearchBar = ({
+  resetSearchParams,
+}: {
+  resetSearchParams: () => void;
+}) => {
   const [manufacturer, setManuFacturer] = useState("");
   const [model, setModel] = useState("");
 
@@ -94,9 +99,17 @@ const SearchBar = () => {
           placeholder="Tiguan..."
           className="searchbar__input border border-gray-300 "
         />
+
         <SearchButton otherClasses="sm:hidden" />
       </div>
-      <SearchButton otherClasses="max-sm:hidden" />
+      <div className="searchbar__item flex items-center gap-3">
+        <SearchButton otherClasses="max-sm:hidden" />
+        <CustomButton
+          handleClick={resetSearchParams}
+          title="Reset"
+          containerStyles="bg-primary-blue text-white rounded-full hover:bg-[#2b36ff]"
+        />
+      </div>
     </form>
   );
 };

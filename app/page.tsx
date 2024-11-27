@@ -3,12 +3,22 @@
 import { fetchCars } from "@/utils";
 import type { HomeProps, ResponseCar } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
-import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@/components";
+import {
+  CarCard,
+  ShowMore,
+  SearchBar,
+  CustomFilter,
+  Hero,
+  CustomButton,
+} from "@/components";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [allCars, setAllCars] = useState<ResponseCar | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +45,26 @@ export default function Home() {
     allCars?.items.length < 1 ||
     !allCars?.items;
 
+  // const handleUpdateSearchParams = (model: string, value: string) => {
+  //   const searchParams = new URLSearchParams(window.location.search);
+  //   searchParams.set(model, value);
+  //   const newPathname = `${
+  //     window.location.pathname
+  //   }?${searchParams.toString()}`;
+  //   router.push(newPathname);
+  // }
+
+  const resetSearchParams = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.delete("model");
+    searchParams.delete("manufacturer");
+    searchParams.delete("fuel");
+    searchParams.delete("year");
+    const newPathname = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+    router.push(newPathname);
+  };
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -46,8 +76,8 @@ export default function Home() {
         </div>
 
         <div className="home__filters">
-          <SearchBar />
-
+          <SearchBar resetSearchParams={resetSearchParams}/>
+         
           <div className="home__filter-container">
             <p>{allCars?.items?.length}</p>
             <CustomFilter title="fuel" options={fuels} />
@@ -56,8 +86,14 @@ export default function Home() {
         </div>
 
         {loading ? (
-          <div className="home__loading-container">
-            <p>Loading...</p> {/* Replace this with a spinner if needed */}
+          <div className="home__loading-container flex-center py-16">
+            <Image
+              src="/car-logo.svg"
+              alt="loader"
+              width={50}
+              height={50}
+              className="object-contain animate-bounce "
+            ></Image>
           </div>
         ) : !isDataEmpty ? (
           <section>
@@ -79,7 +115,9 @@ export default function Home() {
           <div className="home__error-container">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
             <p>
-              {allCars && allCars?.items?.length < 1 && "No cars found. Please adjust your filters."}
+              {allCars &&
+                allCars?.items?.length < 1 &&
+                "No cars found. Please adjust your filters."}
             </p>
           </div>
         )}
