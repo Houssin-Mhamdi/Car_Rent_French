@@ -9,7 +9,7 @@ export const manufacturers = [
   {
     title: "Aston Martin",
     value: "Aston Martin",
-    logo: "/Aston-martin-alt-svgrepo-com.svg",
+    logo: "/aston-martin-alt-svgrepo-com.svg",
   },
   { title: "Audi", value: "Audi", logo: "/audi-svgrepo-com.svg" },
   { title: "Bentley", value: "Bentley", logo: "/bentley-logo-svgrepo-com.svg" },
