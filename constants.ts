@@ -4,12 +4,12 @@ export const manufacturers = [
   {
     title: "Alfa Romeo",
     value: "Alfa Romeo",
-    logo: "/alfa-Romeo-4-logo-svgrepo-com.svg",
+    logo: "/alfa-romeo-4-logo-svgrepo-com.svg",
   },
   {
     title: "Aston Martin",
     value: "Aston Martin",
-    logo: "/Aston-Martin-alt-svgrepo-com.svg",
+    logo: "/Aston-martin-alt-svgrepo-com.svg",
   },
   { title: "Audi", value: "Audi", logo: "/audi-svgrepo-com.svg" },
   { title: "Bentley", value: "Bentley", logo: "/bentley-logo-svgrepo-com.svg" },
