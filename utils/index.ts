@@ -1,3 +1,4 @@
+import { MessageData } from "@/app/contactus/page";
 import { CarProps, FilterProps } from "../types";
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
@@ -46,23 +47,18 @@ export const deleteSearchParams = (type: string) => {
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
 
-  // Set the required headers for the API request
-  const headers: HeadersInit = {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
-    "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
-  };
-
-  // Set the required headers for the API request
   const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
-    {
-      headers: headers,
-    }
+    `http://localhost:4000/car?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`
   );
 
   // Parse the response as JSON
   const result = await response.json();
 
+  return result;
+}
+export async function fetchCarById(id: number) {
+  const response = await fetch(`http://localhost:3000/car/${id}`);
+  const result = await response.json();
   return result;
 }
 
@@ -82,4 +78,20 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   url.searchParams.append("angle", `${angle}`);
 
   return `${url}`;
+};
+
+export const createMessage = async (body: MessageData) => {
+  try {
+    const response = await fetch("http://localhost:4000/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 };
