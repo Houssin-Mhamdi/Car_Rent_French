@@ -48,7 +48,7 @@ export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
 
   const response = await fetch(
-    `http://localhost:4000/car?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`
+    `https://rentlcars.onrender.com/car?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`
   );
 
   // Parse the response as JSON
@@ -57,7 +57,7 @@ export async function fetchCars(filters: FilterProps) {
   return result;
 }
 export async function fetchCarById(id: number) {
-  const response = await fetch(`http://localhost:3000/car/${id}`);
+  const response = await fetch(`https://rentlcars.onrender.com/car/${id}`);
   const result = await response.json();
   return result;
 }
@@ -82,7 +82,7 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
 export const createMessage = async (body: MessageData) => {
   try {
-    const response = await fetch("http://localhost:4000/contact", {
+    const response = await fetch("https://rentlcars.onrender.com/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

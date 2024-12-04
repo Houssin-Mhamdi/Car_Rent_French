@@ -96,7 +96,7 @@ const SearchBar = ({
           name="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          placeholder="Tiguan..."
+          placeholder="Model..."
           className="searchbar__input border border-gray-300 "
         />
 

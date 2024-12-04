@@ -48,7 +48,7 @@ const SearchManufacturer = ({
             className="search-manufacturer__input border border-gray-300"
             displayValue={(item: string) => item}
             onChange={(event) => setQuery(event.target.value)} // Update the search query when the input changes
-            placeholder="Volkswagen..."
+            placeholder="Vehicle..."
           />
 
           {/* Transition for displaying the options */}
